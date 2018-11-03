@@ -30,7 +30,7 @@ size_t Network::random_connect(const double& mean_deg) {
 		std::vector<int> nodes (nbr,0);
 		RNG.uniform_int(nodes, 0, size()-1);
 		for(int j(0); j<nbr; ++j) {
-			while (add_link(values[i],nodes[j])) continue;
+			add_link(values[i],nodes[j]);
 		}
 		count += nbr;
 	}
