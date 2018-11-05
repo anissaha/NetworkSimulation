@@ -24,15 +24,16 @@ bool Network::add_link(const size_t& a, const size_t& b) {
 
 size_t Network::random_connect(const double& mean_deg) {
 	links.clear();
-	int count(0);
+	size_t count(0);
 	for(size_t i(0); i<size(); ++i) {
 		int nbr(RNG.poisson(mean_deg));
 		std::vector<int> nodes (nbr,0);
 		RNG.uniform_int(nodes, 0, size()-1);
 		for(int j(0); j<nbr; ++j) {
-			add_link(i,nodes[j]);
+			if (add_link(i,nodes[j])) {
+				++count;
+			}
 		}
-		count += nbr;
 	}
 	return count;
 }
